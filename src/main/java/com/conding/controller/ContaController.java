@@ -22,7 +22,7 @@ public class ContaController {
 
     private final DataUtil dataUtil;
 
-    @GetMapping("list-all")
+    @GetMapping()
     public ResponseEntity<List<Conta>> list() {
         log.info(dataUtil.formatarDataLocal(LocalDateTime.now()));
         return new ResponseEntity<>(contaService.listAll(), HttpStatus.OK);
@@ -33,20 +33,20 @@ public class ContaController {
         return ResponseEntity.ok(contaService.findById(id));
     }
 
-    @PostMapping("insert")
+    @PostMapping()
     public ResponseEntity<Conta> save(@RequestBody Conta conta) {
         log.info(dataUtil.formatarDataLocal(LocalDateTime.now()));
         return new ResponseEntity<>(contaService.save(conta), HttpStatus.CREATED);
     }
 
-    @PutMapping("/replace/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Conta> replace(@RequestBody Conta conta) {
         log.info(dataUtil.formatarDataLocal(LocalDateTime.now()));
         contaService.replace(conta);
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Conta> delete(@PathVariable long id) {
         log.info(dataUtil.formatarDataLocal(LocalDateTime.now()));
         contaService.delete(id);
